@@ -1,18 +1,29 @@
 
-function MyFirstComponent() {
-  const person = {
-    name: "Mohamed",
-    age: 23,
-  }
-  const x = 10
-  return (
-    <div>
-      <h1>{x * 10} 10 * 10 Gaza Sky Geeks</h1>
-      <h2>{person.name} ReactJS</h2>
-      <h2>{person.age} ReactJS</h2>
+import "./MyFirstComponent.css"
+export default function MyFirstComponent() {
+
+    const x = 10
+
+    const person = {
+        name: "Mohamed",
+        age: 23,
+    }
+
+    // const elmStyle = {
+    //     backgroundColor: "red",
+    // }
+
+
+    return <div>
+        <h1 style={{ backgroundColor: "red", }}>Gaza Sky Geeks</h1>
+        <h3>{person.name}</h3>
+        <h3>{person.age}</h3>
+        <button onClick={sayHello}>Click Me</button>
+        <h4 className={person.name === "Mohamed" ? "greenBg" : "redBg"}>Check Name</h4>
     </div>
-  );
 }
 
-export default MyFirstComponent;
 
+function sayHello() {
+    alert("Hello")
+}
