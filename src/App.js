@@ -1,16 +1,34 @@
-import logo from "./logo.svg";
 import "./App.css";
-import MyFirstComponent from "./MyFirstComponent"
+import Header from "./components/Header";
+import Post from "./components/Post";
+import SideMenu from "./components/SideMenu";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <MyFirstComponent />
+      <Header />
 
-        <MyFirstComponent />
-      </header>
+      {/* POSTS CONTAINER */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div
+          style={{ width: "60%", display: "flex", justifyContent: "center" }}
+        >
+          {/* == POSTS CONTAINER == */}
+          <div style={{ width: "70%" }}>
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+            <Post />
+          </div>
+
+          <div style={{ width: "30%", marginTop: "25px" }}>
+            <SideMenu />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
