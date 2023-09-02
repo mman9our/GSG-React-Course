@@ -1,5 +1,5 @@
 .tagButton {
-  background: purple;
+  background: #34435e;
   border: none;
   border-radius: 10px;
   color: white;
@@ -11,5 +11,5 @@
 }
 
 .tagButton:hover {
-  background-color: rgb(88, 0, 88);
+  background-color: #b88e8d;
 }
