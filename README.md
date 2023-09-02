@@ -1,3 +1,12 @@
+# Challenge #2: List Rendering - Implementing Posts*
+
+*Description:* In this challenge 🦸🏻 , you'll practice list rendering in a React application. You are tasked 🗒️ with implementing a list of posts. Each post should be displayed as an item in a list using map 🗺️ to iterate over an array of post data.
+
+![Screenshot 2023-09-02 233203](https://github.com/mman9our/GSG-React-Course/assets/72463762/46d60077-8e4f-472e-8655-3311ab999ba3)
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
