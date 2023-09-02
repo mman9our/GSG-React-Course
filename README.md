@@ -1,3 +1,12 @@
+
+# Challenge #2 : Reimplement the following Challenge Using Props🚀
+
+Description: In this challenge 💭, you will have the opportunity to apply your React skills 🥷🏻 . The app should display a list of posts with their body, and you should use props to pass data into the app instead of hardcoding it.
+
+![2](https://github.com/mman9our/GSG-React-Course/assets/72463762/479ca9ec-c49a-4cc1-95ae-c17084cd0ab5)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
