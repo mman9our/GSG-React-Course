@@ -7,6 +7,8 @@ function MyForm() {
     age: "",
     genralInfo: "",
     isStudent: false,
+    country: "",
+    status: "",
   });
 
   function handleCheckBoxChange(event) {
@@ -66,6 +68,42 @@ function MyForm() {
           onChange={handleCheckBoxChange}
         />
         <hr></hr>
+
+        <select
+          value={formInputs.country}
+          onChange={(event) => {
+            setFormInputs({ ...formInputs, country: event.target.value });
+          }}
+        >
+          <option>Palstine</option>
+          <option>Jordan</option>
+          <option>Egypt</option>
+        </select>
+
+        <hr></hr>
+
+        <div>
+          <input
+            value="student"
+            type="radio"
+            name="status"
+            checked={formInputs.status === "student"}
+            onChange={(event) => {
+              setFormInputs({ ...formInputs, status: event.target.value });
+            }}
+          />
+          student
+          <input
+            value="teacher"
+            type="radio"
+            name="status"
+            checked={formInputs.status === "teacher"}
+            onChange={(event) => {
+              setFormInputs({ ...formInputs, status: event.target.value });
+            }}
+          />
+          Teacher
+        </div>
         <button>Submit</button>
       </form>
     </div>
