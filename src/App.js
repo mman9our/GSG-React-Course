@@ -1,12 +1,13 @@
-import React from "react";
-import AppChild from "./components/AppChild";
+import React, { useState } from "react";
+import ChildA from "./components/ChildA";
 
 const App = () => {
-	return (
-		<div>
-			<AppChild appChildId={1} innerChildId={2} />
-		</div>
-	);
-};
+  const [title, setTitle] = useState("GSG React Training");
 
+  return (
+    <div>
+      <ChildA title={title} />
+    </div>
+  );
+};
 export default App;
