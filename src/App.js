@@ -1,32 +1,23 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from "react";
+import List from "./components/List.js";
 
-function App() {
+export default function App() {
+  const [isLarge, setIsLarge] = useState(false);
+  const imageSize = isLarge ? 150 : 100;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <MyFirstComponent />
-
-        <h1>Gaza Sky Geeks</h1>
-      </header>
-    </div>
+    <>
+      <label>
+        <input
+          type="checkbox"
+          checked={isLarge}
+          onChange={(e) => {
+            setIsLarge(e.target.checked);
+          }}
+        />
+        Use large images
+      </label>
+      <hr />
+      <List imageSize={imageSize} />
+    </>
   );
 }
-
-function MyFirstComponent() {
-  return <h3>Hello World</h3>;
-}
-
-export default App;
