@@ -1,32 +1,15 @@
-import logo from "./logo.svg";
 import "./App.css";
+import { UserContext } from "./Contexts/UserContext";
+import LoanForm from "./components/LoanForm";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <MyFirstComponent />
-
-        <h1>Gaza Sky Geeks</h1>
-      </header>
+    <div className="App" style={{ marginTop: "250px" }}>
+      <UserContext.Provider value={{userName : "mman9our", name : "Mohamed" , email : "mohamed@gmail.com"}}>
+        <LoanForm />
+        </UserContext.Provider>
     </div>
   );
-}
-
-function MyFirstComponent() {
-  return <h3>Hello World</h3>;
 }
 
 export default App;

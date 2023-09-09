@@ -1,3 +1,9 @@
+body {
+  background: "#121418";
+  font-weight: 900;
+
+}
+
 .App {
   text-align: center;
 }
@@ -21,7 +27,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #121418;
 }
 
 .App-link {
