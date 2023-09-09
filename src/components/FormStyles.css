@@ -1,0 +1,80 @@
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal {
+  position: absolute;
+  background: rgba(0, 0, 0, 0);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+input {
+  font-size: large;
+  font-weight: 700;
+}
+
+#modal-content {
+  border-radius: 20px;
+  background: #1b1f24;
+  width: 50%;
+  text-align: center;
+  height: 20%;
+  color: #69f0ae;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  z-index: 5;
+}
+
+#loan-form {
+  align-items: start;
+  background: #1b1f24;
+  color: #9f4db6;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.4);
+  width: 60%;
+}
+
+label {
+  margin-top: 10px;
+  display: flex;
+  justify-content: start;
+}
+
+input,
+select {
+  width: 100%;
+  height: 30px;
+  border: none;
+}
+
+#submit-loan-btn {
+  margin-top: 20px;
+  border: none;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #9f4db629;
+  color: #9f4db6;
+}
+
+input {
+  background-color: #f5f5f5;
+}
+
+hr {
+  width: 100%;
+}
+
+.disabled {
+  background: #303038 !important;
+  cursor: auto !important;
+}
