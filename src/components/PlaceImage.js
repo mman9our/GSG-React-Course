@@ -1,12 +1,15 @@
 import React from "react";
 import { getImageUrl } from "./Utils";
-const PlaceImage = ({ place, imageSize }) => {
+import { useContext } from "react";
+import { MyContext } from "../Contexts/MyContext";
+const PlaceImage = ({ place }) => {
+  const ImageSizeData = useContext(MyContext);
   return (
     <img
       src={getImageUrl(place)}
       alt={place.name}
-      width={imageSize}
-      height={imageSize}
+      width={ImageSizeData}
+      height={ImageSizeData}
     />
   );
 };

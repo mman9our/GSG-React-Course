@@ -1,10 +1,10 @@
 import React from "react";
 import PlaceImage from "./PlaceImage";
 
-const Place = ({ place, imageSize }) => {
+const Place = ({ place }) => {
   return (
     <>
-      <PlaceImage place={place} imageSize={imageSize} />
+      <PlaceImage place={place} />
       <p>
         <b>{place.name}</b>
         {": " + place.description}
