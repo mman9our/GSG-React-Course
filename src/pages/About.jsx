@@ -1,3 +1,5 @@
+// Layout hint: Make HISTORY and CONTACT inside <h3> elements and add the class name 'subnav_links'🚨❗
+
 import React from "react";
 
 const About = () => {

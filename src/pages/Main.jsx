@@ -4,7 +4,7 @@
 // - '/about' which render the <About /> component
 // - '/about/history' which render the <History /> component
 // - '/about/contact' which render the <Contact /> component
-// - '/classlist/:class' which render the <ClassList /> component
+// - '/classlist' which render the <ClassList /> component
 
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -15,7 +15,7 @@ const Main = () => {
       <div>
         <nav className="nav">
           <h3>Arab American University</h3>
-          <div className="link-wrap">{/* Links */}</div>
+          <div className="link-wrap">{/* Links HOME & ABOUT inside <h3> elemnt */}</div>
         </nav>
         {/* Routes */}
       </div>
