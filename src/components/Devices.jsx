@@ -13,7 +13,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-
 import { v4 as uuidv4 } from "uuid";
 import React, { useState } from "react";
 
@@ -32,7 +31,7 @@ function Devices() {
 
   const deviceList = devices.map((device) => {
     return (
-      <ListItem key={device.id} >
+      <ListItem key={device.id}>
         <Box
           sx={{
             width: 800,
@@ -80,7 +79,7 @@ function Devices() {
   };
 
   const handleOpenDialog = (deviceId) => {
-    setSelectedDeviceId(deviceId); 
+    setSelectedDeviceId(deviceId);
     const deviceToUpdate = devices.find((device) => device.id === deviceId);
     if (deviceToUpdate) {
       setUpdatedDeviceName(deviceToUpdate.name);
@@ -108,11 +107,7 @@ function Devices() {
   }
 
   function handleAddClick() {
-    const updatedDevices = [
-      ...devices,
-      { id: uuidv4(), name: deviceNameInputValue },
-    ];
-    setDevices(updatedDevices);
+    setDevices([...devices, { id: uuidv4(), name: deviceNameInputValue }]);
   }
 
   return (
