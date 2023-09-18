@@ -14,7 +14,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
 import { v4 as uuidv4 } from "uuid";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Devices() {
   const [deviceNameInputValue, setDeviceNameInputValue] = useState("");
@@ -95,6 +95,7 @@ function Devices() {
       return device;
     });
     setDevices(updatedDevices);
+    localStorage.setItem("devices", JSON.stringify(updatedDevices));
     handleClose();
   };
 
@@ -104,11 +105,32 @@ function Devices() {
       return true;
     });
     setDevices(newDevices);
+    localStorage.setItem("devices", JSON.stringify(newDevices));
   }
 
   function handleAddClick() {
-    setDevices([...devices, { id: uuidv4(), name: deviceNameInputValue }]);
+    const updateDevices = [
+      ...devices,
+      { id: uuidv4(), name: deviceNameInputValue },
+    ];
+    setDevices(updateDevices);
+    // localStorage.setItem("devices", devices);
+    localStorage.setItem("devices", JSON.stringify(updateDevices));
   }
+
+  useEffect(() => {
+    const storageDevice = JSON.parse(localStorage.getItem("devices"));
+    setDevices(storageDevice);
+  }, []);
+
+
+  // useEffect(() => {
+    
+  // });
+
+  // useEffect(() => {
+    
+  // }, []);
 
   return (
     <>
