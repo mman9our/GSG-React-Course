@@ -1,32 +1,35 @@
-import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <MyFirstComponent />
+    <div className="todo-container">
+      <h1>
+        <span className="second-title">Todo List App</span>
+      </h1>
+      <form>
+        <input
+          className="add-task"
+          type="text"
+          placeholder="Add new task ..."
+        />
+        <button type="submit" className="add-button">
+          Add
+        </button>
+      </form>
 
-        <h1>Gaza Sky Geeks</h1>
-      </header>
+      <div className="todo">
+        <div className="todo-text">
+          <input className="checkbox" type="checkbox" id="isCompleted" />
+        </div>
+        <div>Learn useEffect Hook</div>
+
+        <div className="todo-actions">
+          <button className="submit-edits">Edit</button>
+          <button className="submit-edits">Delete</button>
+        </div>
+      </div>
     </div>
   );
-}
-
-function MyFirstComponent() {
-  return <h3>Hello World</h3>;
-}
-
+};
 export default App;
