@@ -10,11 +10,11 @@ function PostDetails() {
     })
     return (
         <>
-            <h1>PostDetails</h1>
+            <h1>Post Details</h1>
             <h3>{post.title}</h3>
             <h3>{post.body}</h3>
         </>
     )
 }
 
-export default PostDetails
+export default PostDetails;

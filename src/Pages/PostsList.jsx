@@ -8,7 +8,7 @@ function PostsList() {
 
     const psotList = postData.map((post) => {
         return (
-            <Link key={post.id} to={`/postDetails/${post.id}`}>
+            <Link key={post.id} to={`/posts/${post.id}`}>
                 <div style={{ background: "teal", padding: "20px", color: "white", marginTop: "10px" }}>
                     <h1>{post.title}</h1>
                 </div>
