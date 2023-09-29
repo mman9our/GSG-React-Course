@@ -1,0 +1,89 @@
+html {
+  background-color: #121418;
+  color: white;
+  height: 100%;
+  font-family: "poopins", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+  height: 95%;
+  gap: 100px;
+  margin: 20px;
+  color: #1877f2;
+}
+
+#left-column {
+  flex: 3;
+  background-color: #282d33;
+  padding: 20px;
+  border: 1px solid #1877f2;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+#right-column {
+  flex: 7;
+  background-color: #282d33;
+  padding: 20px;
+  border: 1px solid #1877f2;
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+
+.user {
+  background-color: #121418;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.user:hover {
+  background-color: #1877f233;
+}
+
+.post {
+  background-color: #121418;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.post:hover {
+  background-color: #1877f233;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.loader {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#left-column::-webkit-scrollbar,
+#right-column::-webkit-scrollbar {
+  width: 8px;
+}
