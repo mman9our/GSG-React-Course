@@ -5,9 +5,15 @@ import drizzleWeatherImage from "./assets/drizzle-weather.png";
 // MATERIAL UI COMPONENTS
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { Button, Fab } from "@mui/material";
+import { Fab } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+
+// REACT
+import { useEffect, useState } from "react";
+
+// EXTERNAL LIBRARIES
+import axios from "axios"
 
 const theme = createTheme({
   typography: {
@@ -15,7 +21,33 @@ const theme = createTheme({
   },
 });
 
+let cancelAxios = null;
 function App() {
+  const [temp, setTemp] = useState(null);
+  console.log("rendering the component (mouting)");
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.openweathermap.org/data/2.5/weather?lat=32.4646&lon=35.302535&appid=173629f86fd0b98403cdc9f22c9b127b",
+        {
+          cancelToken: new axios.CancelToken((c) => {
+            cancelAxios = c;
+          }),
+        }
+      )
+      .then((response) => {
+        const responseTemp = Math.round(response.data.main.temp - 273.15);
+        console.log(responseTemp);
+        setTemp(responseTemp);
+      });
+
+    return () => {
+      console.log("Caneling");
+      cancelAxios();
+    };
+  }, []);
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -95,7 +127,7 @@ function App() {
                       }}
                     >
                       <Typography variant="h1" style={{ textAlign: "right" }}>
-                        13
+                        {temp}
                       </Typography>
 
                       {/* TODO: TEMP IMAGE */}
@@ -142,7 +174,7 @@ function App() {
             </div>
 
             {/* TRANSLIATION BUTTON */}
-            <div
+            {/* <div
               dir="rtl"
               style={{
                 width: "100%",
@@ -151,7 +183,7 @@ function App() {
               }}
             >
               <Button variant="contained">إنجليزي</Button>
-            </div>
+            </div> */}
             {/*== CARD ==*/}
           </div>
           {/*== CONTENT CONTAINER ==*/}
