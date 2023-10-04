@@ -5,7 +5,7 @@ import drizzleWeatherImage from "./assets/drizzle-weather.png";
 // MATERIAL UI COMPONENTS
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { Fab } from "@mui/material";
+import { Button, Fab } from "@mui/material";
 import CloudIcon from "@mui/icons-material/Cloud";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 
@@ -13,7 +13,12 @@ import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import { useEffect, useState } from "react";
 
 // EXTERNAL LIBRARIES
-import axios from "axios"
+import axios from "axios";
+import moment from "moment";
+import "moment/min/locales";
+import { useTranslation } from "react-i18next";
+
+moment.locale("ar");
 
 const theme = createTheme({
   typography: {
@@ -23,27 +28,67 @@ const theme = createTheme({
 
 let cancelAxios = null;
 function App() {
-  const [temp, setTemp] = useState(null);
-  console.log("rendering the component (mouting)");
+  const { t, i18n } = useTranslation();
+  const [locale, setLocale] = useState("ar");
+  function handleLangugeChange() {
+    if (locale == "en") {
+      setLocale("ar");
+      i18n.changeLanguage("ar");
+    } else {
+      setLocale("en");
+      i18n.changeLanguage("en");
+    }
+  }
+
+  useEffect(() => {
+    i18n.changeLanguage(locale);
+  }, []);
+
+  const [temp, setTemp] = useState({
+    number: null,
+    description: "",
+    min: null,
+    max: null,
+    icon: null,
+  });
+
+  const [dateAndTime, setDateAndTime] = useState("");
+  useEffect(() => {
+    const dateAndTime = moment().format("MMMM - Do - YYYY");
+    setDateAndTime(dateAndTime);
+  }, []);
 
   useEffect(() => {
     axios
       .get(
-        "https://api.openweathermap.org/data/2.5/weather?lat=32.4646&lon=35.302535&appid=173629f86fd0b98403cdc9f22c9b127b",
+        "https://api.openweathermap.org/data/2.5/weather?lat=32.462068&lon=35.302535&appid=173629f86fd0b98403cdc9f22c9b127b",
         {
           cancelToken: new axios.CancelToken((c) => {
             cancelAxios = c;
           }),
         }
       )
-      .then((response) => {
+      .then(function (response) {
+        console.log("🚀 ~ file: App.js:44 ~ response:", response);
         const responseTemp = Math.round(response.data.main.temp - 273.15);
-        console.log(responseTemp);
-        setTemp(responseTemp);
+        const min = Math.round(response.data.main.temp_min - 273.15);
+        const max = Math.round(response.data.main.temp_max - 273.15);
+        const description = response.data.weather[0].description;
+        const responseIcon = response.data.weather[0].icon;
+
+        setTemp({
+          number: responseTemp,
+          description: description,
+          min: min,
+          max: max,
+          icon: `https://openweathermap.org/img/wn/${responseIcon}@2x.png`,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
 
     return () => {
-      console.log("Caneling");
       cancelAxios();
     };
   }, []);
@@ -91,11 +136,11 @@ function App() {
                       fontWeight: "600",
                     }}
                   >
-                    جنين
+                    {t("Jenin")}
                   </Typography>
 
                   <Typography variant="h5" style={{ marginRight: "20px" }}>
-                    الأحد 1-10-2023
+                    {dateAndTime}
                   </Typography>
                 </div>
                 {/* == CITY & TIME == */}
@@ -127,14 +172,15 @@ function App() {
                       }}
                     >
                       <Typography variant="h1" style={{ textAlign: "right" }}>
-                        {temp}
+                        {temp.number}
                       </Typography>
 
+                      <img src={temp.icon} alt="Weather icon" />
                       {/* TODO: TEMP IMAGE */}
                     </div>
                     {/*== TEMP ==*/}
 
-                    <Typography variant="h6">غائم جزئي</Typography>
+                    <Typography variant="h6">{temp.description}</Typography>
 
                     {/* MIN & MAX */}
                     <div
@@ -148,12 +194,12 @@ function App() {
                     >
                       <Fab variant="extended">
                         <CloudIcon sx={{ m: 1 }} />
-                        الصغرى : 10
+                        الصغرى : {temp.min}
                       </Fab>
 
                       <Fab variant="extended">
                         <WbSunnyIcon sx={{ m: 1 }} />
-                        الكبرى : 13
+                        الكبرى : {temp.max}
                       </Fab>
                     </div>
                   </div>
@@ -174,7 +220,7 @@ function App() {
             </div>
 
             {/* TRANSLIATION BUTTON */}
-            {/* <div
+            <div
               dir="rtl"
               style={{
                 width: "100%",
@@ -182,8 +228,11 @@ function App() {
                 display: "flex",
               }}
             >
-              <Button variant="contained">إنجليزي</Button>
-            </div> */}
+              <Button variant="contained" onClick={handleLangugeChange}>
+                {locale == "en" ? "Arabic" : "انجليزي"}
+              </Button>
+            </div>
+
             {/*== CARD ==*/}
           </div>
           {/*== CONTENT CONTAINER ==*/}
