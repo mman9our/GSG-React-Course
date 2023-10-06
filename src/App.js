@@ -3,7 +3,7 @@ import "./App.css";
 import React, { useEffect, useState } from "react";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
 import Protected from "./Utils/Protected";
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);

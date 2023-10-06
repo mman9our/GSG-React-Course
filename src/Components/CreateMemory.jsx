@@ -69,13 +69,25 @@ const CreateMemory = ({ open, handleClose, handleCreateMemory }) => {
 						fullWidth
 						sx={{ mb: 2 }}
 					/>
-					{image && (
-						<img
-							src={image}
-							alt="Uploaded"
-							style={{ width: "100%", marginBottom: "1rem" }}
-						/>
-					)}
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						{image && (
+							<img
+								src={image}
+								alt="Uploaded"
+								style={{
+									borderRadius: "10px",
+									width: "50%",
+									marginBottom: "1rem",
+								}}
+							/>
+						)}
+					</div>
+
 					<label htmlFor="image-upload">
 						<Button
 							variant="contained"
@@ -94,8 +106,8 @@ const CreateMemory = ({ open, handleClose, handleCreateMemory }) => {
 								color: "black",
 								backgroundColor: "white",
 								":hover": {
-									bgcolor: "white",
-									color: "black",
+									bgcolor: "#212121",
+									color: "white",
 								},
 								"&:active": {
 									boxShadow: "none",
@@ -129,8 +141,8 @@ const CreateMemory = ({ open, handleClose, handleCreateMemory }) => {
 							color: "black",
 							backgroundColor: "white",
 							":hover": {
-								bgcolor: "white",
-								color: "black",
+								bgcolor: "#212121",
+								color: "white",
 							},
 							"&:active": {
 								boxShadow: "none",
