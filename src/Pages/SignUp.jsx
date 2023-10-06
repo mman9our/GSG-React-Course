@@ -59,6 +59,7 @@ const defaultTheme = createTheme({
 	},
 	typography: typography,
 });
+
 export default function SignUp() {
 	const navigate = useNavigate();
 	const handleSubmit = (event) => {
