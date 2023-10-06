@@ -18,7 +18,7 @@ const style = {
 	borderRadius: "20px",
 };
 
-const CreateMemory = ({ open, handleClose, handleCreateMemory }) => {
+const CreateMemory = ({ open, handleClose, handleCreateMemory, }) => {
 	const [title, setTitle] = useState("");
 	const [image, setImage] = useState(null);
 

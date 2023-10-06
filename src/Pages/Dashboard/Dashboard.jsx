@@ -6,6 +6,7 @@ import {
 	Button,
 	Card,
 	CardContent,
+	CardMedia,
 	Container,
 	Divider,
 	Fade,
@@ -23,8 +24,9 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
-import { Add, AspectRatio } from "@mui/icons-material";
 import CreateMemory from "../../Components/CreateMemory";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 const Dashboard = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("user"));
 	const [open, setOpen] = useState(false);
@@ -166,7 +168,7 @@ const Dashboard = () => {
 								variant="outlined"
 								sx={{
 									width: "100%",
-									height: "90%",
+									height: "100%", // Change height to 100%
 									border: "1px solid white",
 									backgroundColor: "#f2f2f2",
 									position: "relative",
@@ -217,22 +219,51 @@ const Dashboard = () => {
 											open={Boolean(anchorEl)}
 											onClose={handleMenuClose}
 										>
-											<MenuItem onClick={handleMenuClose}>Option 1</MenuItem>
-											<MenuItem onClick={handleMenuClose}>Option 2</MenuItem>
+											<MenuItem onClick={handleMenuClose}>
+												<div
+													style={{
+														display: "flex",
+														justifyContent: "center",
+														alignItems: "center",
+													}}
+												>
+													<EditIcon />
+													<span style={{ paddingLeft: "5px" }}>Edit</span>
+												</div>
+											</MenuItem>
+											<MenuItem onClick={handleMenuClose}>
+												<div
+													style={{
+														display: "flex",
+														justifyContent: "center",
+														alignItems: "center",
+													}}
+												>
+													<DeleteIcon />
+													<span style={{ paddingLeft: "5px" }}>Delete</span>
+												</div>
+											</MenuItem>
 											{/* Add more MenuItems as needed */}
 										</Menu>
 									</div>
 									<div>
-										<img
-											src={memory.image}
-											style={{ width: "100%", height: "90%" }}
+										<CardMedia
+											component="img"
+											image={memory.image}
+											sx={{
+												width: "100%",
+												height: "300px",
+												objectFit: "contain",
+											}}
 											loading="lazy"
 											alt=""
 										/>
 									</div>
 								</div>
 								<CardContent>
-									<Typography>{memory.title}</Typography>
+									<Typography style={{ fontFamily: "Signika" }}>
+										{memory.title}
+									</Typography>
 								</CardContent>
 								<Divider inset="context" />
 							</Card>
