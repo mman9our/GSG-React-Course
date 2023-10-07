@@ -1,39 +1,20 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import React, { useEffect, useState } from "react";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
-import Dashboard from "./Pages/Dashboard/Dashboard.jsx";
-import Protected from "./Utils/Protected";
+import Dashboard from "./Pages/Dashboard";
 function App() {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-	useEffect(() => {
-		const user = localStorage.getItem("user");
-		if (user) {
-			setIsLoggedIn(true);
-		}
-	}, []);
-
-	return (
-		<div className="App">
-			<BrowserRouter>
-				<Routes>
-					<Route element={<h1>Home</h1>} path="/" />
-					<Route element={<SignIn />} path="/signin" />
-					<Route element={<SignUp />} path="/signup" />
-					<Route
-						path="/dashboard"
-						element={
-							<Protected isLoggedIn={isLoggedIn}>
-								<Dashboard />
-							</Protected>
-						}
-					/>
-				</Routes>
-			</BrowserRouter>
-		</div>
-	);
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route element={<SignIn />} path="/" />
+          <Route element={<SignUp />} path="/signup" />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;
