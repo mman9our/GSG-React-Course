@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -13,52 +11,30 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const typography = {
-  fontFamily: '"Segoe UI", sans-serif',
-  fontSize: 14,
-  h1: {
-    fontSize: "2rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  h2: {
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  h3: {
-    fontSize: "1.2rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  body1: {
-    fontSize: "1rem",
-    color: "white",
-  },
-  body2: {
-    fontSize: "0.875rem",
-    color: "white",
-  },
-};
 
-// Use the typography theme in createTheme
 const defaultTheme = createTheme({
   palette: {
-    primary: {
-      main: "#1976D2",
-    },
-    secondary: {
-      main: "#FF4081",
-    },
-    background: {
-      default: "#282c34",
-    },
     text: {
-      primary: "#FFFFFF",
+      primary: "#FFFF"
     },
   },
-  typography: typography,
+  typography: {
+    h3: {
+      fontSize: "1.2rem",
+      fontWeight: 600,
+      color: "white",
+    },
+    body1: {
+      fontSize: "1rem",
+      color: "white",
+    },
+    body2: {
+      fontSize: "0.875rem",
+      color: "white",
+    },
+  }
 });
+
 
 export default function SignUp() {
   return (
@@ -79,7 +55,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 3 }}>
+          <form noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={12}>
                 <TextField
@@ -113,14 +89,6 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
             </Grid>
             <Button
               type="submit"
@@ -132,12 +100,12 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/signin" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
-          </Box>
+          </form>
         </Box>
       </Container>
     </ThemeProvider>

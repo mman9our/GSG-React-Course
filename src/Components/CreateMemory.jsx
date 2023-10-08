@@ -30,6 +30,8 @@ const CreateMemory = ({ open, handleClose, setMemories }) => {
     const file = event.target.files[0];
 
     const reader = new FileReader();
+    console.log("🚀 ~ file: CreateMemory.jsx:33 ~ handleImageChange ~ reader:", reader)
+    
     reader.onload = () => {
       setImageCover(reader.result);
     };

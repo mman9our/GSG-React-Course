@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,53 +13,30 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-// Define typography theme
-const typography = {
-  fontFamily: '"Segoe UI", sans-serif',
-  fontSize: 14,
-  h1: {
-    fontSize: "2rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  h2: {
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  h3: {
-    fontSize: "1.2rem",
-    fontWeight: 600,
-    color: "white",
-  },
-  body1: {
-    fontSize: "1rem",
-    color: "white",
-  },
-  body2: {
-    fontSize: "0.875rem",
-    color: "white",
-  },
-};
-
-// Use the typography theme in createTheme
 const defaultTheme = createTheme({
   palette: {
-    primary: {
-      main: "#1976D2",
-    },
-    secondary: {
-      main: "#FF4081",
-    },
-    background: {
-      default: "#282c34",
-    },
     text: {
-      primary: "#FFFFFF",
+      primary: "#FFFF"
     },
   },
-  typography: typography,
+  typography: {
+    h3: {
+      fontSize: "1.2rem",
+      fontWeight: 600,
+      color: "white",
+    },
+    body1: {
+      fontSize: "1rem",
+      color: "white",
+    },
+    body2: {
+      fontSize: "0.875rem",
+      color: "white",
+    },
+  }
 });
+
+
 
 export default function SignIn() {
   return (
@@ -82,7 +58,7 @@ export default function SignIn() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <form noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -133,7 +109,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
               </Grid>
-            </Box>
+            </form>
           </>
         </Box>
       </Container>
