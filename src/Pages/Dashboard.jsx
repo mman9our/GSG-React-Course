@@ -20,13 +20,14 @@ import AddIcon from "@mui/icons-material/Add";
 import CreateMemory from "../Components/CreateMemory";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  const navigate = useNavigate()
   const [memories, setMorries] = useState([
     {
       id: 1,
@@ -35,7 +36,10 @@ const Dashboard = () => {
         "https://images.unsplash.com/photo-1543261207-e5f1837778c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80",
     },
   ]);
-
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    navigate('/')
+  }
   return (
     <>
       <div>
@@ -69,6 +73,7 @@ const Dashboard = () => {
               </Typography>
 
               <Button
+                onClick={handleLogout}
                 color="inherit"
                 sx={{
                   fontFamily: "Signika",

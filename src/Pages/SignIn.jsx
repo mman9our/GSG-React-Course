@@ -12,6 +12,9 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 const defaultTheme = createTheme({
   palette: {
@@ -39,6 +42,28 @@ const defaultTheme = createTheme({
 
 
 export default function SignIn() {
+
+  const navigate = useNavigate()
+  const [userData, setUserData] = useState({
+    email: "",
+    password: ""
+  });
+
+  function handleSubmit(e) {
+    e.preventDefault()
+
+    axios.post("http://16.170.173.197/users/login", userData)
+      .then((response) => {
+        console.log("🚀 ~ file: SignIn.jsx:57 ~ .then ~ response:", response)
+        const token = response.data.token;
+        localStorage.setItem("token", token)
+        navigate("/dashboard")
+
+      }).catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -58,7 +83,7 @@ export default function SignIn() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <form noValidate sx={{ mt: 1 }}>
+            <form noValidate sx={{ mt: 1 }} onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 required
@@ -68,6 +93,10 @@ export default function SignIn() {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={userData.email}
+                onChange={(e) => {
+                  setUserData({ ...userData, email: e.target.value })
+                }}
               />
               <TextField
                 margin="normal"
@@ -78,6 +107,10 @@ export default function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={userData.password}
+                onChange={(e) => {
+                  setUserData({ ...userData, password: e.target.value })
+                }}
               />
               <FormControlLabel
                 control={
