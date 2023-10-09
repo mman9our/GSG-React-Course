@@ -21,25 +21,84 @@ import CreateMemory from "../Components/CreateMemory";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { Navigate, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const navigate = useNavigate()
-  const [memories, setMorries] = useState([
-    {
-      id: 1,
-      description: "This is the content",
-      image:
-        "https://images.unsplash.com/photo-1543261207-e5f1837778c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80",
-    },
-  ]);
+  const [memories, setMemories] = useState([]);
+  const token = localStorage.getItem("token")
+
+  useEffect(() => {
+    axios.get("http://16.170.173.197/posts", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((response) => {
+      setMemories(response.data.posts)
+    }).catch((error) => {
+      console.log("Error Fedching memories", error)
+    })
+  }, [])
+
+
   const handleLogout = () => {
     localStorage.removeItem('token')
     navigate('/')
   }
+
+
+  const handleDeletePost = (postId) => {
+    axios
+      .request({
+        method: "delete",
+        url: "http://16.170.173.197/posts",
+        data: {
+          id: postId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const updatedMemories = memories.filter((memory) => {
+          return memory.id !== postId;
+        });
+        setMemories(updatedMemories);
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
+  };
+
+  const handleEditPost = (postId) => {
+    const newDiscraption = prompt("please add the new disc");
+
+    axios
+      .request({
+        method: "put",
+        url: "http://16.170.173.197/posts",
+        data: {
+          id: postId,
+          description: newDiscraption,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
+  };
+
+
   return (
     <>
       <div>
@@ -131,7 +190,7 @@ const Dashboard = () => {
               Create a memory 🔮
             </Button>
           </Stack>
-          <CreateMemory open={open} handleClose={handleClose} />
+          <CreateMemory open={open} handleClose={handleClose} setMemories={setMemories} />
         </Box>
         <Divider light />
         <Container>
@@ -150,6 +209,7 @@ const Dashboard = () => {
                 >
                   <Stack direction="row" spacing={1}>
                     <Button
+                      onClick={() => handleDeletePost(memory.id)}
                       sx={{
                         display: "flex",
                         justifyContent: "center",
@@ -160,6 +220,7 @@ const Dashboard = () => {
                       <DeleteIcon />
                     </Button>
                     <Button
+                      onClick={() => handleEditPost(memory.id)}
                       sx={{
                         display: "flex",
                         justifyContent: "center",

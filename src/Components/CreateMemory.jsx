@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Input from "@mui/material/Input";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -20,7 +21,10 @@ const style = {
 
 const CreateMemory = ({ open, handleClose, setMemories }) => {
   const [description, setdescription] = useState("");
+  const [image, setImage] = useState(null)
   const [imageCover, setImageCover] = useState(null);
+
+  const token = localStorage.getItem("token")
 
   const handledescriptionChange = (event) => {
     setdescription(event.target.value);
@@ -28,15 +32,38 @@ const CreateMemory = ({ open, handleClose, setMemories }) => {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
+    setImage(file);
 
     const reader = new FileReader();
-    console.log("🚀 ~ file: CreateMemory.jsx:33 ~ handleImageChange ~ reader:", reader)
-    
     reader.onload = () => {
       setImageCover(reader.result);
     };
     reader.readAsDataURL(file);
   };
+
+  let formData = new FormData();
+
+  formData.append("description", description)
+  formData.append("image", image)
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+
+    axios.post("http://16.170.173.197/posts", formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data"
+      }
+    }).then((response) => {
+      console.log("🚀 ~ file: CreateMemory.jsx:59 ~ handleSubmit ~ response:", response)
+      setMemories((prevMomeris) => [...prevMomeris, response.data])
+    }).catch((error) => {
+      console.log("Error:", error)
+    })
+
+    handleClose()
+  }
 
   return (
     <Modal
@@ -69,6 +96,7 @@ const CreateMemory = ({ open, handleClose, setMemories }) => {
               style={{ width: "100%", marginBottom: "1rem" }}
             />
           )}
+
           <label htmlFor="image-upload">
             <Button
               variant="contained"
@@ -110,6 +138,7 @@ const CreateMemory = ({ open, handleClose, setMemories }) => {
             type="submit"
             variant="contained"
             color="primary"
+            onClick={handleSubmit}
             sx={{
               fontWeight: 900,
               paddingTop: "5px",
