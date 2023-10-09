@@ -56,7 +56,7 @@ const Dashboard = () => {
     axios
       .request({
         method: "delete",
-        url: "http://16.170.173.197/posts",
+        url: `http://16.170.173.197/posts/${postId}`,
         data: {
           id: postId,
         },
@@ -81,9 +81,8 @@ const Dashboard = () => {
     axios
       .request({
         method: "put",
-        url: "http://16.170.173.197/posts",
+        url: `http://16.170.173.197/posts/${postId}`,
         data: {
-          id: postId,
           description: newDiscraption,
         },
         headers: {
