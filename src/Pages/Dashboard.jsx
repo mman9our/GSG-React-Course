@@ -29,37 +29,35 @@ const Dashboard = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [memories, setMemories] = useState([]);
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    axios.get("http://16.170.173.197/posts", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((response) => {
-      setMemories(response.data.posts)
-    }).catch((error) => {
-      console.log("Error Fedching memories", error)
-    })
-  }, [])
-
+    axios
+      .get("http://16.170.173.197/posts", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setMemories(response.data.posts);
+      })
+      .catch((error) => {
+        console.log("Error Fedching memories", error);
+      });
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('token')
-    navigate('/')
-  }
-
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   const handleDeletePost = (postId) => {
     axios
       .request({
         method: "delete",
         url: `http://16.170.173.197/posts/${postId}`,
-        data: {
-          id: postId,
-        },
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,9 +80,6 @@ const Dashboard = () => {
       .request({
         method: "put",
         url: `http://16.170.173.197/posts/${postId}`,
-        data: {
-          description: newDiscraption,
-        },
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -96,7 +91,6 @@ const Dashboard = () => {
         console.error("Error deleting post:", error);
       });
   };
-
 
   return (
     <>
@@ -189,7 +183,11 @@ const Dashboard = () => {
               Create a memory 🔮
             </Button>
           </Stack>
-          <CreateMemory open={open} handleClose={handleClose} setMemories={setMemories} />
+          <CreateMemory
+            open={open}
+            handleClose={handleClose}
+            setMemories={setMemories}
+          />
         </Box>
         <Divider light />
         <Container>
